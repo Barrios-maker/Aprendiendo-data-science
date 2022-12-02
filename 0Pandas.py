@@ -16,8 +16,10 @@ a=pd.DataFrame(Diccionario)
 
 #print(a)
 
-a=pd.read_csv('Fifa_Worldcup_2022_Groups.csv')
+grupos_mundial=pd.read_csv('Fifa_Worldcup_2022_Groups.csv')
 
+grupos_mundial['Puntos']=0
 
-print(a.shape)
+print(grupos_mundial.columns)
 
+print(grupos_mundial[['Country_Name_Short','Puntos']])
