@@ -1,6 +1,12 @@
 import math
 import numpy as np
 def benford(L):
+    """
+    This function recives a list of type float numbers and obtain a list with the 
+    distribution of thees numbers according to the firts digit of each numbergit 
+    (difrent from 0) in ascendinng order from 1 to 9 and a percentage of how 
+    close is the original list of numbers to Benford distribution
+    """
     Clasification=[[],[],[],[],[],[],[],[],[]]
     for i in range(len(L)):
         number = str(L[i])
@@ -22,23 +28,11 @@ def benford(L):
     for k in range(len(Clasification)):
         total = total + len(Clasification[k])
     for m in range(len(Clasification)):
-        Real_Distribution.append(Clasification[m]/total)
+        Real_Distribution.append(len(Clasification[m])/total)
 
-    def mse (actual,pred):
-        actual,pred = np.array(actual),np.array(pred)
-        return np.sqrt(np.square(np.subtract(actual,pred)))
+    mse = 0
+
+    actual,pred = np.array(Real_Distribution),np.array(Theor_Distribution)
+    mse = np.sqrt(np.square(np.subtract(actual,pred))).mean()
     
-
-    return Real_Distribution, mse(Real_Distribution,Theor_Distribution)
-
-
-'''
-l=[0.1,0.0002,0.389,478,99,6675,147.2,563,135,456,510,289,267,111,0.3587]
-print(benford(l))
-
-
-
-Lista = [1459,0.0028,347,477,0.5,606,707,801,0.9,100]
-
-print(benford(Lista))
-'''
+    return Real_Distribution, str(round(mse*471.5869,2))+' %'
